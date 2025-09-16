@@ -5,7 +5,7 @@
 </head>
 <body>
   <h1>Página de contacto</h1>
-  <form id="form-contacto" action="/" method="post"></form>
+  <form id="form-contacto">
     <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="nombre"><br><br>
     <label for="email">Correo electrónico:</label>
@@ -16,6 +16,8 @@
   </form>
 
   <script>
+    const correoEstatico = 'perezjimenezjhonfredy2@gmail.com'; // Configuración del correo electrónico estáticamente
+
     const formContacto = document.getElementById('form-contacto');
     const enviar = document.getElementById('enviar');
 
@@ -25,15 +27,33 @@
       const email = document.getElementById('email').value;
       const mensaje = document.getElementById('mensaje').value;
 
-      // Guardar la información en LocalStorage
+      // Almacenar la data en LocalStorage
       localStorage.setItem('nombre', nombre);
       localStorage.setItem('email', email);
       localStorage.setItem('mensaje', mensaje);
 
-      alert('Mensaje enviado con éxito!');
-      // Borrar la data del mensaje enviado después de enviarlo
-      localStorage.clear();
+      // Enviar la data al correo electrónico configurado estáticamente
+      enviarDatos();
     });
+
+    function enviarDatos() {
+      const nombre = localStorage.getItem('nombre');
+      const email = localStorage.getItem('email');
+      const mensaje = localStorage.getItem('mensaje');
+
+      // Crear un objeto con la data del formulario
+      const datos = {
+        nombre,
+        email,
+        mensaje,
+      };
+
+      // Enviar la data al correo electrónico configurado estáticamente
+      fetch(`mailto:${correoEstatico}?subject=Mensaje%20de%20contacto&body=${JSON.stringify(datos)}`)
+        .then((response) => response.text())
+        .then((response) => console.log(response))
+        .catch((error) => console.error(error));
+    }
   </script>
 </body>
 </html>
