@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const correoEstatico = 'perezjimenezjhonfredy2@gmail.com';
+const correoEstatico = 'micorreo@gmail.com';
 
 app.use(express.json());
 
@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
   res.send('Bienvenido a la página de contacto!');
 });
 
-app.post('/enviar-mensaje', (req, res) => {
+app.post('/formulario/', (req, res) => {
   const { nombre, email, mensaje } = req.body;
 
   if (nombre === '' || email === '' || mensaje === '') {
@@ -41,8 +41,14 @@ app.post('/enviar-mensaje', (req, res) => {
 app.get('/contacto', (req, res) => {
     res.sendFile(__dirname + '/index.html');
   });
+
+// app.post('/contacto', (req, res) => {
+//   const { nombre, email, mensaje } = req.body;
+
+//   // Resto del código para enviar el mensaje por correo electrónico
+// });
+
   
 app.listen(3000, () => {
   console.log('Servidor escuchando en el puerto 3000');
 });
-
