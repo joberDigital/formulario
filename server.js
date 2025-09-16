@@ -38,7 +38,7 @@ app.post('/formulario/', (req, res) => {
 });
 
 
-app.get('/contacto', (req, res) => {
+app.get('/formulario', (req, res) => {
     res.sendFile(__dirname + '/index.html');
   });
 
