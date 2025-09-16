@@ -5,7 +5,7 @@
 </head>
 <body>
   <h1>Página de contacto</h1>
-  <form id="form-contacto">
+  <form id="form-contacto" action="/contacto" method="post">
     <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="nombre"><br><br>
     <label for="email">Correo electrónico:</label>
@@ -26,7 +26,7 @@
       const mensaje = document.getElementById('mensaje').value;
 
       // Enviar mensaje por correo electrónico
-      const respuesta = await fetch('/enviar-mensaje', {
+      const respuesta = await fetch('/contacto', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
