@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const correoEstatico = 'micorreo@gmail.com';
+const correoEstatico = 'perezjimenezjhonfredy2@gmail.com';
 
 app.use(express.json());
 
@@ -45,3 +45,4 @@ app.get('/contacto', (req, res) => {
 app.listen(3000, () => {
   console.log('Servidor escuchando en el puerto 3000');
 });
+
