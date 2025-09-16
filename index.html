@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Página de contacto</title>
+</head>
+<body>
+  <h1>Página de contacto</h1>
+  <form id="form-contacto">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre"><br><br>
+    <label for="email">Correo electrónico:</label>
+    <input type="email" id="email" name="email"><br><br>
+    <label for="mensaje">Mensaje:</label>
+    <textarea id="mensaje" name="mensaje"></textarea><br><br>
+    <input type="submit" value="Enviar" id="enviar">
+  </form>
+
+  <script>
+    const formContacto = document.getElementById('form-contacto');
+    const enviar = document.getElementById('enviar');
+
+    formContacto.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const nombre = document.getElementById('nombre').value;
+      const email = document.getElementById('email').value;
+      const mensaje = document.getElementById('mensaje').value;
+
+      // Enviar mensaje por correo electrónico
+      const respuesta = await fetch('/enviar-mensaje', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nombre,
+          email,
+          mensaje,
+        }),
+      });
+
+      const resultado = await respuesta.json();
+
+      if (resultado.error) {
+        alert(resultado.error);
+      } else {
+        alert(resultado.mensaje);
+        // Borrar la data del mensaje enviado después de enviarlo
+        localStorage.clear();
+      }
+    });
+  </script>
+</body>
+</html>
